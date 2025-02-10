@@ -23,7 +23,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.update(productId, product);
     }
 
-
+    @Override
+    public void delete(UUID productId) {
+        productRepository.delete(productId);
+    }
 
     @Override
     public List<Product> findAll() {

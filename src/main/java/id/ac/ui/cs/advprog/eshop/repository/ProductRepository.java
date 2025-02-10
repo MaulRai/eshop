@@ -30,7 +30,9 @@ public class ProductRepository {
         return null; // Product not found
     }
 
-
+    public void delete(UUID productId) {
+        productData.removeIf(product -> product.getProductId().equals(productId));
+    }
 
     public Product findById(UUID productId) {
         return productData.stream()
