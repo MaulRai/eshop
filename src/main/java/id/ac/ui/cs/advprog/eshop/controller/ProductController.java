@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/product")
@@ -36,4 +38,16 @@ public class ProductController {
         return "productList";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editProductPage(@PathVariable UUID id, Model model) {
+        Product product = service.findById(id);
+        model.addAttribute("product", product);
+        return "editProduct";
+    }
+
+    @PostMapping("/update")
+    public String updateProductPost(@ModelAttribute Product product, Model model) {
+        service.update(product.getProductId(), product);
+        return "redirect:list";
+    }
 }
