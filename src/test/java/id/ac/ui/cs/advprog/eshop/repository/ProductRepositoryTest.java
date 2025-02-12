@@ -19,9 +19,16 @@ public class ProductRepositoryTest {
 
     @InjectMocks
     ProductRepository productRepository;
+    private Product product;
 
     @BeforeEach
-    void setUp() {}
+    void setUp() {
+        productRepository = new ProductRepository();
+        product = new Product();
+        product.setProductName("Test Product");
+        product.setProductQuantity(10);
+        productRepository.create(product);
+    }
 
     @Test
     void testCreateAndFind() {
@@ -67,4 +74,51 @@ public class ProductRepositoryTest {
         assertEquals(product2.getProductId(), savedProduct.getProductId());
         assertFalse(productIterator.hasNext());
     }
+
+    @Test
+    void testUpdate_ProductExists() {
+        UUID productId = product.getProductId();
+        Product updatedProduct = new Product();
+        updatedProduct.setProductName("Updated Product");
+        updatedProduct.setProductQuantity(20);
+
+        Product result = productRepository.update(productId, updatedProduct);
+
+        assertNotNull(result);
+        assertEquals("Updated Product", result.getProductName());
+        assertEquals(20, result.getProductQuantity());
+        assertNotEquals(30, result.getProductQuantity());
+    }
+
+    @Test
+    void testUpdate_ProductDoesNotExist() {
+        UUID nonExistentProductId = UUID.randomUUID();
+        Product updatedProduct = new Product();
+        updatedProduct.setProductName("Updated Product");
+        updatedProduct.setProductQuantity(20);
+
+        Product result = productRepository.update(nonExistentProductId, updatedProduct);
+
+        assertNull(result);
+    }
+
+    @Test
+    void testDelete_ProductExists() {
+        UUID productId = product.getProductId();
+
+        productRepository.delete(productId);
+
+        Product deletedProduct = productRepository.findById(productId);
+        assertNull(deletedProduct);
+    }
+
+    @Test
+    void testDelete_ProductDoesNotExist() {UUID nonExistentProductId = UUID.randomUUID();
+
+        productRepository.delete(nonExistentProductId);
+
+        Iterator<Product> products = productRepository.findAll();
+        assertTrue(products.hasNext());
+    }
+
 }
