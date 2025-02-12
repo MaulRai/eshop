@@ -62,6 +62,6 @@ public class CreateProductFunctionalTest {
             return cells.size() > 0 && cells.get(0).getText().equals(name);
         });
 
-        assertTrue(productExists, "Product was not found in the product list after submission.");
+        assertTrue(productExists, "Produkna teu aya.");
     }
 }
