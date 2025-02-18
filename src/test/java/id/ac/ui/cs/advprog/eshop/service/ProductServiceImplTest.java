@@ -70,4 +70,49 @@ class ProductServiceImplTest {
         assertNull(result);
         verify(productRepository, times(1)).update(productId, testProduct);
     }
+
+    @Test
+    void testDeleteProduct() {
+        doNothing().when(productRepository).delete(productId);
+
+        productService.delete(productId);
+
+        verify(productRepository, times(1)).delete(productId);
+    }
+
+    @Test
+    void testFindAllProducts() {
+        List<Product> mockProducts = new ArrayList<>();
+        mockProducts.add(testProduct);
+        mockProducts.add(new Product());
+
+        when(productRepository.findAll()).thenReturn(mockProducts.iterator());
+
+        List<Product> result = productService.findAll();
+
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        verify(productRepository, times(1)).findAll();
+    }
+
+    @Test
+    void testFindByIdProductExists() {
+        when(productRepository.findById(productId)).thenReturn(testProduct);
+
+        Product result = productService.findById(productId);
+
+        assertNotNull(result);
+        assertEquals(testProduct.getProductName(), result.getProductName());
+        verify(productRepository, times(1)).findById(productId);
+    }
+
+    @Test
+    void testFindByIdProductDoesNotExist() {
+        when(productRepository.findById(productId)).thenReturn(null);
+
+        Product result = productService.findById(productId);
+
+        assertNull(result);
+        verify(productRepository, times(1)).findById(productId);
+    }
 }
