@@ -123,4 +123,24 @@ public class ProductRepositoryTest {
         assertTrue(products.hasNext());
     }
 
+    @Test
+    void testFindById_ProductExists() {
+        UUID productId = product.getProductId();
+
+        Product foundProduct = productRepository.findById(productId);
+
+        assertNotNull(foundProduct); // ✅ Ensures product is found
+        assertEquals(product.getProductName(), foundProduct.getProductName());
+        assertEquals(product.getProductQuantity(), foundProduct.getProductQuantity());
+    }
+
+    @Test
+    void testFindById_ProductDoesNotExist() {
+        UUID nonExistentProductId = UUID.randomUUID();
+
+        Product foundProduct = productRepository.findById(nonExistentProductId);
+
+        assertNull(foundProduct); // ✅ Ensures method returns null if not found
+    }
+
 }
