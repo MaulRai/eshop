@@ -74,4 +74,34 @@ class ProductControllerTest {
         verify(productService, times(1)).findAll();
     }
 
+    @Test
+    void testEditProductPage_ReturnsEditProductView() throws Exception {
+        when(productService.findById(productId)).thenReturn(product);
+
+        mockMvc.perform(get("/product/edit/{id}", productId))
+                .andExpect(status().isOk())
+                .andExpect(view().name("editProduct"))
+                .andExpect(model().attributeExists("product"));
+
+        verify(productService, times(1)).findById(productId);
+    }
+
+    @Test
+    void testUpdateProductPost_RedirectsToList() throws Exception {
+        mockMvc.perform(post("/product/update")
+                        .flashAttr("product", product))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("list"));
+
+        verify(productService, times(1)).update(eq(productId), any(Product.class));
+    }
+
+    @Test
+    void testDeleteProduct_RedirectsToList() throws Exception {
+        mockMvc.perform(get("/product/delete/{id}", productId))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/product/list"));
+
+        verify(productService, times(1)).delete(productId);
+    }
 }
