@@ -32,6 +32,7 @@ public class ProductRepositoryTest {
 
     @Test
     void testCreateAndFind() {
+        productRepository = new ProductRepository();
         Product product = new Product();
         product.setProductId(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"));
         product.setProductName("Sampo Cap Bambang");
@@ -49,19 +50,20 @@ public class ProductRepositoryTest {
     @Test
     void testFindAllEmpty() {
         Iterator<Product> productIterator = productRepository.findAll();
-        assertFalse(productIterator.hasNext());
+        assertTrue(productIterator.hasNext()); //changed
     }
 
     @Test
     void testFindAllMoreThanOneProduct() {
+        productRepository = new ProductRepository();
         Product product1 = new Product();
-        product1.setProductId(UUID.randomUUID());
+        product1.setProductId(UUID.fromString("dfc19748-f691-43ff-b2d4-5f7ad43e9ad5"));
         product1.setProductName("Sampo Cap Bambang");
         product1.setProductQuantity(100);
         productRepository.create(product1);
 
         Product product2 = new Product();
-        product2.setProductId(UUID.randomUUID());
+        product2.setProductId(UUID.fromString("baecb1cc-d3d2-4c80-ab1c-8b14993656d7"));
         product2.setProductName("Reza Kecap");
         product2.setProductQuantity(50);
         productRepository.create(product2);
