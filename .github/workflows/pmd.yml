@@ -1,0 +1,23 @@
+name: PMD Analysis
+
+on: [push, pull_request]
+
+jobs:
+  pmd:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run PMD Analysis
+        run: ./gradlew pmdMain
