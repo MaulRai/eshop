@@ -34,6 +34,6 @@ class HomePageControllerTest {
     void testCreateProductPage_ReturnsHomePageView() throws Exception {
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())  // checks if status is 200 OK
-                .andExpect(view().name("homePage"));  // checks if it returns "homePage" view
+                .andExpect(view().name("HomePage"));  // checks if it returns "homePage" view
     }
 }
