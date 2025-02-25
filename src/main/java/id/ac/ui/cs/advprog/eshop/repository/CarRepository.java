@@ -14,10 +14,10 @@ public class CarRepository {
     private List<Car> carData = new ArrayList<>();
 
     public Car create(Car car) {
-        if (car.getCarId() == null) {
-            UUID uuid = UUID.randomUUID();
-            car.setCarId(uuid.toString());
-        }
+        // Problem:
+        // The repository's responsibility should be data persistence only.
+        // However, it also generates a UUID for carId, which should be handled in the service layer.
+        // Fix: Move ID generation to CarServiceImpl.
         carData.add(car);
         return car;
     }

@@ -17,7 +17,11 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public Car create(Car car) {
-        // TODO: Auto-generated method stub
+        // Fix: Move ID generation to CarServiceImpl.
+        if (car.getCarId() == null) {
+            UUID uuid = UUID.randomUUID();
+            car.setCarId(uuid.toString());
+        }
         carRepository.create(car);
         return car;
     }
