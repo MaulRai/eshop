@@ -61,7 +61,10 @@ public class ProductController {
 
 @Controller
 @RequestMapping("/car")
-class CarController extends ProductController {
+class CarController {
+    //  Problem:
+    //  CarController is not a ProductController, so inheritance is incorrect.
+    //  Instead, it should be independent.
     @Autowired
     private CarServiceImpl carService;
 
