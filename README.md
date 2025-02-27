@@ -61,9 +61,11 @@ dependen lain, sehingga perlu disesuaikan lagi.
    > yang seharusnya tugas service. Solusinya dengan memindahkan UUID generation ke CarServiceImpl.
    > - Pindahkan class CarController ke Java file tersendiri. Menulisnya pada satu file yang sama akan
    > mencampur responsibility, membuat kode menjadi lebih sulit di maintain.
-   >
-   > **?**
-   > - 
+   > 
+   > **Dependency Inversion Principle**
+   > - Menggunakan kelas abstrak sebisa mungkin, yaitu pada CarController saya mengganti `private CarServiceImpl
+   > - carService;` menjadi `private CarService carService;`
+
 2. Explain the advantages of applying SOLID principles to your project with examples.
    
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
