@@ -51,3 +51,22 @@ dependen lain, sehingga perlu disesuaikan lagi.
    > saja dibuat sebuah lewat refactor yang berisi atribut yang sama dan kemudian cukup inherit kelas tersebut
    > untuk masing-masing suite. Atau bahkan dibuat menjadi satu kelas saja dan menjadi suite utuh.
 
+# Reflection 3
+
+1. Explain what principles you apply to your project!
+   > **Single Responsibility Principle**
+   > - CarController bukanlah ProductController, jadi inheritance kurang tepat. 
+   > Instead, CarController seharusnya independent.
+   > - Pada CarRepository, harusnya menghandle data persistence saja, tetapi class ini juga handle UUID generation,
+   > yang seharusnya tugas service. Solusinya dengan memindahkan UUID generation ke CarServiceImpl.
+   > - Pindahkan class CarController ke Java file tersendiri. Menulisnya pada satu file yang sama akan
+   > mencampur responsibility, membuat kode menjadi lebih sulit di maintain.
+   >
+   > **?**
+   > - 
+2. Explain the advantages of applying SOLID principles to your project with examples.
+   
+3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+
+
++
