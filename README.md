@@ -79,7 +79,32 @@ dependen lain, sehingga perlu disesuaikan lagi.
    > - carService;` menjadi `private CarService carService;`
 
 2. Explain the advantages of applying SOLID principles to your project with examples.
-   
+   > Secara keseluruhan pengaplikasian prinsip SOLID, akan membuat kode mudah dipelihara dan dikembangkan.
+   > Kode menjadi bisa lebih fleksibel dan reusable. Selain itu kode akan menjadi lebih mudah diubah dan
+   > dites.
+   > 
+   > Adapun poin spesifik yang saya implementasikan, yang pertama Single Responsibility Principle (SRP),
+   > Dengan memisahkan CarController ke dalam file terpisah dan menghindari pewarisan dari ProductController, 
+   > kode menjadi lebih "modular" dan lebih mudah dipahami. Dengan memindahkan UUID generation dari repository 
+   > ke service layer, CarRepository hanya fokus pada data persistence, sedangkan CarService bertanggung jawab 
+   > atas logika bisnis, sehingga memudahkan perubahan pada logika bisnis tanpa mempengaruhi repository.
+   > 
+   > Selanjutnya pada poin Dependency Inversion Principle (DIP), Dengan mengubah private CarServiceImpl 
+   > carService; menjadi private CarService carService;, saya mengurangi ketergantungan terhadap implementasi 
+   > konkret. Hal ini memungkinkan fleksibilitas untuk mengganti CarServiceImpl dengan implementasi lain 
+   > (misalnya CarServiceMock untuk unit testing)
+
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+   > Secara keseluruhan jika tanpa pengaplikasian prinsip SOLID, Kelas menjadi terlalu besar dan kompleks karena 
+   > menangani banyak tanggung jawab. Perubahan di satu bagian kode bisa menyebabkan efek samping pada bagian 
+   > lain, sehingga debugging menjadi sulit. Kode menjadi lebih sulit untuk dipelihara dan dikembangkan, 
+   > karena satu kelas memiliki terlalu banyak fungsi.
+   > 
+   > Secara spesifik, jika saya tidak mengimplementasikan SRP, jika satu class memiliki banyak tanggung jawab, 
+   > setiap perubahan kecil bisa berdampak besar pada bagian lain yang tidak berhubungan, sehingga meningkatkan 
+   > kompleksitas debugging dan maintenance. Sedangkan jika tidak menerapkan DIP, kode akan bergantung langsung 
+   > pada implementasi (CarServiceImpl) dan setiap perubahan dalam implementasi akan memaksa perubahan pada 
+   > seluruh kode yang menggunakannya.
+
 
 
