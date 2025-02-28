@@ -61,6 +61,18 @@ dependen lain, sehingga perlu disesuaikan lagi.
    > yang seharusnya tugas service. Solusinya dengan memindahkan UUID generation ke CarServiceImpl.
    > - Pindahkan class CarController ke Java file tersendiri. Menulisnya pada satu file yang sama akan
    > mencampur responsibility, membuat kode menjadi lebih sulit di maintain.
+   >
+   > **Open-Closed Principle***
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena kodenya 
+   > sudah terbuka untuk ekstensi namun tertutup untuk modifikasi
+   > 
+   > **Liskov Substitution Principle**
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena semua
+   > subclass yang ada sudah berfungsionalitas dengan baik untuk menggantikan parent class
+   > 
+   > **Interface Segregation Principle**
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena semua
+   > class yang meng-implement interface sudah cocok secara funsionalitas interface nya.
    > 
    > **Dependency Inversion Principle**
    > - Menggunakan kelas abstrak sebisa mungkin, yaitu pada CarController saya mengganti `private CarServiceImpl
@@ -71,4 +83,3 @@ dependen lain, sehingga perlu disesuaikan lagi.
 3. Explain the disadvantages of not applying SOLID principles to your project with examples.
 
 
-+
