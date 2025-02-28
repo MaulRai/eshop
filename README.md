@@ -51,3 +51,60 @@ dependen lain, sehingga perlu disesuaikan lagi.
    > saja dibuat sebuah lewat refactor yang berisi atribut yang sama dan kemudian cukup inherit kelas tersebut
    > untuk masing-masing suite. Atau bahkan dibuat menjadi satu kelas saja dan menjadi suite utuh.
 
+# Reflection 3
+
+1. Explain what principles you apply to your project!
+   > **Single Responsibility Principle**
+   > - CarController bukanlah ProductController, jadi inheritance kurang tepat. 
+   > Instead, CarController seharusnya independent.
+   > - Pada CarRepository, harusnya menghandle data persistence saja, tetapi class ini juga handle UUID generation,
+   > yang seharusnya tugas service. Solusinya dengan memindahkan UUID generation ke CarServiceImpl.
+   > - Pindahkan class CarController ke Java file tersendiri. Menulisnya pada satu file yang sama akan
+   > mencampur responsibility, membuat kode menjadi lebih sulit di maintain.
+   >
+   > **Open-Closed Principle***
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena kodenya 
+   > sudah terbuka untuk ekstensi namun tertutup untuk modifikasi
+   > 
+   > **Liskov Substitution Principle**
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena semua
+   > subclass yang ada sudah berfungsionalitas dengan baik untuk menggantikan parent class
+   > 
+   > **Interface Segregation Principle**
+   > Tidak ada modifikasi lanjutan selain implementasi default pada module menurut prinsip ini, karena semua
+   > class yang meng-implement interface sudah cocok secara funsionalitas interface nya.
+   > 
+   > **Dependency Inversion Principle**
+   > - Menggunakan kelas abstrak sebisa mungkin, yaitu pada CarController saya mengganti `private CarServiceImpl
+   > - carService;` menjadi `private CarService carService;`
+
+2. Explain the advantages of applying SOLID principles to your project with examples.
+   > Secara keseluruhan pengaplikasian prinsip SOLID, akan membuat kode mudah dipelihara dan dikembangkan.
+   > Kode menjadi bisa lebih fleksibel dan reusable. Selain itu kode akan menjadi lebih mudah diubah dan
+   > dites.
+   > 
+   > Adapun poin spesifik yang saya implementasikan, yang pertama Single Responsibility Principle (SRP),
+   > Dengan memisahkan CarController ke dalam file terpisah dan menghindari pewarisan dari ProductController, 
+   > kode menjadi lebih "modular" dan lebih mudah dipahami. Dengan memindahkan UUID generation dari repository 
+   > ke service layer, CarRepository hanya fokus pada data persistence, sedangkan CarService bertanggung jawab 
+   > atas logika bisnis, sehingga memudahkan perubahan pada logika bisnis tanpa mempengaruhi repository.
+   > 
+   > Selanjutnya pada poin Dependency Inversion Principle (DIP), Dengan mengubah private CarServiceImpl 
+   > carService; menjadi private CarService carService;, saya mengurangi ketergantungan terhadap implementasi 
+   > konkret. Hal ini memungkinkan fleksibilitas untuk mengganti CarServiceImpl dengan implementasi lain 
+   > (misalnya CarServiceMock untuk unit testing)
+
+3. Explain the disadvantages of not applying SOLID principles to your project with examples.
+   > Secara keseluruhan jika tanpa pengaplikasian prinsip SOLID, Kelas menjadi terlalu besar dan kompleks karena 
+   > menangani banyak tanggung jawab. Perubahan di satu bagian kode bisa menyebabkan efek samping pada bagian 
+   > lain, sehingga debugging menjadi sulit. Kode menjadi lebih sulit untuk dipelihara dan dikembangkan, 
+   > karena satu kelas memiliki terlalu banyak fungsi.
+   > 
+   > Secara spesifik, jika saya tidak mengimplementasikan SRP, jika satu class memiliki banyak tanggung jawab, 
+   > setiap perubahan kecil bisa berdampak besar pada bagian lain yang tidak berhubungan, sehingga meningkatkan 
+   > kompleksitas debugging dan maintenance. Sedangkan jika tidak menerapkan DIP, kode akan bergantung langsung 
+   > pada implementasi (CarServiceImpl) dan setiap perubahan dalam implementasi akan memaksa perubahan pada 
+   > seluruh kode yang menggunakannya.
+
+
+
