@@ -19,7 +19,7 @@ public class OrderRepositoryTest {
     @BeforeEach
     void setup() {
         orderRepository = new OrderRepository();
-        List<Product> products new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         Product product1 = new Product();
         product1.setProductId(UUID.fromString("eb558e9f-1c39-460e-8860-71af6af63bd6"));
         product1.setProductName("Sampo Cap Bambang");
